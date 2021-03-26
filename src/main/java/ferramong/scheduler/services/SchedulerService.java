@@ -5,6 +5,7 @@ import ferramong.scheduler.repositories.SchedulerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -24,5 +25,19 @@ public class SchedulerService {
 
     public List<Scheduler> listAllWithName(String name) {
         return schedulerRepository.listAllWithName(name);
+    }
+
+    public boolean schedule(Scheduler scheduling) {
+        int rowsAffected = schedulerRepository.schedule(scheduling.getCpf(), scheduling.getDate());
+
+        return (rowsAffected > 0);
+    }
+
+    // Matheus fará
+    public boolean unschedule(Scheduler scheduling) {
+        return false;
+        /*List<Scheduler> response = schedulerRepository.unschedule(scheduling.getCpf(), scheduling.getDate());
+
+        return (response.size() > 0);*/
     }
 }

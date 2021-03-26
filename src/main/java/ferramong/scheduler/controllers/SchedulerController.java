@@ -99,11 +99,11 @@ public class SchedulerController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public ResponseEntity<Scheduler> schedule(@RequestBody Scheduler scheduling) {
+        if (!schedulerService.schedule(scheduling)) {
+            return ResponseEntity.badRequest().build();
+        }
 
-        return ResponseEntity
-                .created(URI
-                        .create(String.format("/persons/%s", scheduling.getCpf())))
-                .body(scheduling);
+        return ResponseEntity.accepted().build();
     }
 
     // Matheus fará
@@ -129,10 +129,10 @@ public class SchedulerController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public ResponseEntity<Scheduler> unschedule(@RequestBody Scheduler scheduling) {
+        if (!schedulerService.unschedule(scheduling)) {
+            return ResponseEntity.badRequest().build();
+        }
 
-        return ResponseEntity
-                .created(URI
-                        .create(String.format("/persons/%s", scheduling.getCpf())))
-                .body(scheduling);
+        return ResponseEntity.accepted().build();
     }
 }

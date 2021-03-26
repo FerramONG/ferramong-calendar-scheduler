@@ -2,10 +2,13 @@ package ferramong.scheduler.repositories;
 
 import ferramong.scheduler.entities.Scheduler;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -34,4 +37,29 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
             @Param("cpf") String cpf
     );
 
+    @Transactional
+    @Modifying
+    @Query(value=
+            "INSERT INTO Scheduler " +
+            "(cpf, date) " +
+            "VALUES (:cpf, :date)",
+            nativeQuery = true
+    )
+    public int schedule(
+            @Param("cpf") String cpf,
+            @Param("date") Date date
+    );
+
+    // Matheus fará
+    /*
+    @Transactional
+    @Modifying
+    @Query(value=
+            "...",
+            nativeQuery = true
+    )
+    public int unschedule(
+            @Param("cpf") String cpf,
+            @Param("date") Date date
+    );*/
 }
