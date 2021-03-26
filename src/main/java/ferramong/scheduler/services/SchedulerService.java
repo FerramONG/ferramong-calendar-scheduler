@@ -25,4 +25,11 @@ public class SchedulerService {
     public List<Scheduler> listAllWithName(String name) {
         return schedulerRepository.listAllWithName(name);
     }
+
+    public boolean unschedule(int idDweller) {
+        int rowsAffected = schedulerRepository.unschedule(idDweller);
+
+        return (rowsAffected > 0);
+    }
+
 }
