@@ -23,8 +23,16 @@ public class SchedulerService {
 
     private final SchedulerRepository schedulerRepository;
 
-    public List<Scheduler> listAllWithName(String name) {
-        return schedulerRepository.listAllWithName(name);
+    public List<Scheduler> getDatesWithScheduling(Date start, Date end) {
+        return schedulerRepository.getDatesWithScheduling(start, end);
+    }
+
+    public List<Scheduler> getSchedulerForDay(Date date) {
+        return schedulerRepository.getSchedulerForDay(date);
+    }
+
+    public List<Scheduler> getByCPF(String cpf) {
+        return schedulerRepository.getByCPF(cpf);
     }
 
     public boolean schedule(Scheduler scheduling) {

@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
+import javax.ws.rs.PathParam;
 import java.lang.reflect.Member;
 import java.net.URI;
 import java.util.*;
@@ -31,11 +32,6 @@ public class SchedulerController {
 
     private final SchedulerService schedulerService;
 
-    @RequestMapping("/listall/{name}")
-    public List<Scheduler> listAllWithName(@PathVariable("name") @NotBlank String name) {
-        return schedulerService.listAllWithName(name);
-    }
-
     /**
      * Gets scheduled visits within a date range.
      *
@@ -44,24 +40,25 @@ public class SchedulerController {
      *
      * @return      JSON with scheduled visits in the interval [start; end]
      */
-    //@RequestMapping("/listall/{name}")
-    public List<Scheduler> getDatesWithScheduling(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date start,
+    @GetMapping("/scheduler/dates/{start}/{end}")
+    public List<Scheduler> getDatesWithScheduling(@PathVariable("start")
+                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date start,
+                                                  @PathVariable("end")
                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date end) {
-        List<Scheduler> l = new ArrayList<>();
-        return l;
+        return schedulerService.getDatesWithScheduling(start, end);
     }
 
     /**
      * Gets scheduled visits for a specific day.
      *
-     * @param       day Day whose visits will be obtained
+     * @param       date Day whose visits will be obtained
      *
      * @return      JSON with scheduled visits in the interval [start; end]
      */
-    //@RequestMapping("/listall/{name}")
-    public List<Scheduler> getSchedulerForDay(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date day) {
-        List<Scheduler> l = new ArrayList<>();
-        return l;
+    @GetMapping("/scheduler/{date}")
+    public List<Scheduler> getSchedulerForDay(@PathVariable("date")
+                                              @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
+        return schedulerService.getSchedulerForDay(date);
     }
 
     /**
@@ -71,10 +68,9 @@ public class SchedulerController {
      *
      * @return      JSON with the dweller's schedules with the informed cpf
      */
-    //@RequestMapping("/listall/{name}")
-    public List<Scheduler> getByCPF(String cpf) {
-        List<Scheduler> l = new ArrayList<>();
-        return l;
+    @GetMapping("/scheduler/dweller/{cpf}")
+    public List<Scheduler> getByCPF(@PathVariable("cpf") String cpf) {
+        return schedulerService.getByCPF(cpf);
     }
 
     /**
@@ -94,7 +90,7 @@ public class SchedulerController {
      */
     @CrossOrigin
     @PostMapping(
-            value = "/schedule",
+            value = "/scheduler",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
@@ -124,7 +120,7 @@ public class SchedulerController {
      */
     @CrossOrigin
     @DeleteMapping(
-            value = "/schedule",
+            value = "/scheduler",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )

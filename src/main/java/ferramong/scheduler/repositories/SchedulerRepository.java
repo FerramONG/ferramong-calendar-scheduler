@@ -16,24 +16,40 @@ import java.util.List;
  *      Responsável por gerenciar queries do banco de dados
  */
 
-/*
-*  getByID(id do usuario) que retorne qual horário ele ja tem marcado se houver,
-* um post que receba um horário e um id e salve isso no banco, e um post com id
-* do usuario para deleção do horário dele.
-*
-*  códigos http, mas ja adianto que vou usar query parameters pra mandar o id da pessoa no getById,
-*  e que por enquanto as respostas esperadas pensei em 200 no caso de ja haver a data e 204
-* no caso de não haver data para aquela pessoa.
-* */
-
 @Repository
 public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
 
     @Query(
             "SELECT s FROM Scheduler s " +
-            "WHERE s.cpf LIKE CONCAT(UPPER(:cpf), '%')"
+            "WHERE s.date BETWEEN :start AND :end"
     )
-    public List<Scheduler> listAllWithName(
+    public List<Scheduler> getDatesWithScheduling(
+            @Param("start") Date start,
+            @Param("end") Date end
+    );
+
+    /*@Query(value=
+            "SELECT s FROM Scheduler s " +
+            "WHERE EXTRACT(DAY FROM s.date) = EXTRACT(DAY FROM :date) " +
+            "AND EXTRACT(MONTH FROM s.date) = EXTRACT(MONTH FROM :date) " +
+            "AND EXTRACT(YEAR FROM s.date) = EXTRACT(YEAR FROM :date)",
+            nativeQuery = true
+    )*/
+    @Query(value=
+            "SELECT s FROM Scheduler s " +
+            "WHERE SUBSTRING(s.date, 1, 4) = SUBSTRING(:date, 1, 4) " +
+            "AND SUBSTRING(s.date, 6, 2) = SUBSTRING(:date, 6, 2) " +
+            "AND SUBSTRING(s.date, 9, 2) = SUBSTRING(:date, 9, 2)"
+    )
+    public List<Scheduler> getSchedulerForDay(
+            @Param("date") Date date
+    );
+
+    @Query(
+            "SELECT s FROM Scheduler s " +
+            "WHERE s.cpf = :cpf"
+    )
+    public List<Scheduler> getByCPF(
             @Param("cpf") String cpf
     );
 
