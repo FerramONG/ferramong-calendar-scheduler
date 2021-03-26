@@ -79,13 +79,30 @@ public class SchedulerController {
      *      curl "http://localhost:8080/scheduler/dweller/12345678900"
      * </code>
      *
-     * @param       cpf Dweller's cpf
+     * @param       idDweller Dweller's id
      *
-     * @return      JSON with the dweller's schedules with the informed cpf
+     * @return      JSON with the dweller's schedules with the informed id
      */
-    @GetMapping("/scheduler/dweller/{cpf}")
-    public List<Scheduler> getByCPF(@PathVariable("cpf") String cpf) {
-        return schedulerService.getByCPF(cpf);
+    @GetMapping("/scheduler/dweller/{idDweller}")
+    public List<Scheduler> getAllById(@PathVariable("idDweller") int idDweller) {
+        return schedulerService.getAllById(idDweller);
+    }
+
+    /**
+     * Gets last visit that a dweller did.
+     *
+     * <h2>CURL example<h2/>
+     * <code>
+     *      curl "http://localhost:8080/scheduler/dweller/12345678900/last"
+     * </code>
+     *
+     * @param       idDweller Dweller's id
+     *
+     * @return      JSON with the dweller's schedules with the informed id
+     */
+    @GetMapping("/scheduler/dweller/{idDweller}/last")
+    public Scheduler getById(@PathVariable("idDweller") int idDweller) {
+        return schedulerService.getById(idDweller);
     }
 
     /**
@@ -95,7 +112,7 @@ public class SchedulerController {
      * <code>
      *      curl "http://localhost:8080/schedule" \
      *      -X POST \
-     *      -d "{\n  \"cpf\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}" \
+     *      -d "{\n  \"idDweller\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}" \
      *      -H "Content-type: application/json"
      * </code>
      *
@@ -120,17 +137,17 @@ public class SchedulerController {
 
     // Matheus fará
     /**
-     * Schedules a visit.
+     * Unschedules a visit.
      *
      * <h2>CURL example<h2/>
      * <code>
      *      curl "http://localhost:8080/schedule" \
      *      -X DELETE \
-     *      -d "{\n  \"cpf\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}" \
+     *      -d "{\n  \"id\": \"12345678900\"}" \
      *      -H "Content-type: application/json"
      * </code>
      *
-     * @param       scheduling Scheduling information
+     * @param       idDweller Dweller's id
      *
      * @return      Accepted request (202) if scheduling has been successful;
      * otherwise, returns bad request (400) if an error occurred
@@ -141,8 +158,8 @@ public class SchedulerController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public ResponseEntity<Scheduler> unschedule(@RequestBody Scheduler scheduling) {
-        if (!schedulerService.unschedule(scheduling)) {
+    public ResponseEntity<Scheduler> unschedule(int idDweller) {
+        if (!schedulerService.unschedule(idDweller)) {
             return ResponseEntity.badRequest().build();
         }
 

@@ -36,21 +36,25 @@ public class SchedulerService {
         return schedulerRepository.getSchedulerForDay(date);
     }
 
-    public List<Scheduler> getByCPF(String cpf) {
-        return schedulerRepository.getByCPF(cpf);
+    public List<Scheduler> getAllById(int idDweller) {
+        return schedulerRepository.getAllById(idDweller);
+    }
+
+    public Scheduler getById(int idDweller) {
+        return schedulerRepository.getById(idDweller).get(0);
     }
 
     public boolean schedule(Scheduler scheduling) {
-        int rowsAffected = schedulerRepository.schedule(scheduling.getCpf(), scheduling.getDate());
+        int rowsAffected = schedulerRepository.schedule(scheduling.getIdDweller(), scheduling.getDate());
 
         return (rowsAffected > 0);
     }
 
     // Matheus fará
-    public boolean unschedule(Scheduler scheduling) {
+    public boolean unschedule(int idDweller) {
         return false;
-        /*List<Scheduler> response = schedulerRepository.unschedule(scheduling.getCpf(), scheduling.getDate());
+        /*int rowsAffected = schedulerRepository.unschedule(idDweller);
 
-        return (response.size() > 0);*/
+        return (rowsAffected > 0);*/
     }
 }

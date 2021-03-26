@@ -38,24 +38,34 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
             @Param("date") Date date
     );
 
+    @Query(value =
+            "SELECT s FROM Scheduler s " +
+            "WHERE s.idDweller = :idDweller " +
+            "ORDER BY s.date DESC LIMIT 1",
+            nativeQuery = true
+    )
+    public List<Scheduler> getById(
+            @Param("idDweller") int idDweller
+    );
+
     @Query(
             "SELECT s FROM Scheduler s " +
-            "WHERE s.cpf = :cpf"
+            "WHERE s.idDweller = :idDweller"
     )
-    public List<Scheduler> getByCPF(
-            @Param("cpf") String cpf
+    public List<Scheduler> getAllById(
+            @Param("idDweller") int idDweller
     );
 
     @Transactional
     @Modifying
     @Query(value=
             "INSERT INTO Scheduler " +
-            "(cpf, date) " +
-            "VALUES (:cpf, :date)",
+            "(idDweller, date) " +
+            "VALUES (:idDweller, :date)",
             nativeQuery = true
     )
     public int schedule(
-            @Param("cpf") String cpf,
+            @Param("idDweller") int idDweller,
             @Param("date") Date date
     );
 
@@ -68,7 +78,6 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
             nativeQuery = true
     )
     public int unschedule(
-            @Param("cpf") String cpf,
-            @Param("date") Date date
+            @Param("idDweller") int idDweller
     );*/
 }

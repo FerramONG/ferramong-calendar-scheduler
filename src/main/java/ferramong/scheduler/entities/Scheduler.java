@@ -25,7 +25,7 @@ public class Scheduler implements Serializable {
     private long id;
 
     @Column(nullable = false)
-    private String cpf;
+    private int idDweller;
 
     @Column(nullable = false)
     private Date date;
