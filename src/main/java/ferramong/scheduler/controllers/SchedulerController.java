@@ -35,7 +35,7 @@ public class SchedulerController {
     /**
      * Gets scheduled visits within a date range.
      *
-     * <h2>CURL example<h2/>
+     * <h2>CURL example</h2>
      * <code>
      *      curl "http://localhost:8080/scheduler/dates/2021-03-27/2021-03-28"
      * </code>
@@ -56,7 +56,7 @@ public class SchedulerController {
     /**
      * Gets scheduled visits for a specific day.
      *
-     * <h2>CURL example<h2/>
+     * <h2>CURL example</h2>
      * <code>
      *      curl "http://localhost:8080/scheduler/2021-03-26"
      * </code>
@@ -74,7 +74,7 @@ public class SchedulerController {
     /**
      * Gets all schedules that a dweller did.
      *
-     * <h2>CURL example<h2/>
+     * <h2>CURL example</h2>
      * <code>
      *      curl "http://localhost:8080/scheduler/dweller/12345678900"
      * </code>
@@ -91,7 +91,7 @@ public class SchedulerController {
     /**
      * Gets last visit that a dweller did.
      *
-     * <h2>CURL example<h2/>
+     * <h2>CURL example</h2>
      * <code>
      *      curl "http://localhost:8080/scheduler/dweller/12345678900/last"
      * </code>
@@ -101,14 +101,14 @@ public class SchedulerController {
      * @return      JSON with the dweller's schedules with the informed id
      */
     @GetMapping("/scheduler/dweller/{idDweller}/last")
-    public Scheduler getById(@PathVariable("idDweller") int idDweller) {
+    public Date getById(@PathVariable("idDweller") int idDweller) {
         return schedulerService.getById(idDweller);
     }
 
     /**
      * Schedules a visit.
      *
-     * <h2>CURL example<h2/>
+     * <h2>CURL example</h2>
      * <code>
      *      curl "http://localhost:8080/schedule" \
      *      -X POST \
@@ -139,7 +139,7 @@ public class SchedulerController {
     /**
      * Unschedules a visit.
      *
-     * <h2>CURL example<h2/>
+     * <h2>CURL example</h2>
      * <code>
      *      curl "http://localhost:8080/schedule" \
      *      -X DELETE \
