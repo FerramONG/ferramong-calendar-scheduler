@@ -50,18 +50,9 @@ public class SchedulerService {
         return (rowsAffected > 0);
     }
 
-    // Matheus fará
-    public boolean unschedule(int idDweller) {
-        return false;
-        /*int rowsAffected = schedulerRepository.unschedule(idDweller);
-
-        return (rowsAffected > 0);*/
-    }
-
     public boolean unschedule(int idDweller) {
         int rowsAffected = schedulerRepository.unschedule(idDweller);
 
         return (rowsAffected > 0);
     }
-
 }
