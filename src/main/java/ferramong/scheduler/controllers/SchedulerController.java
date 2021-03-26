@@ -35,6 +35,14 @@ public class SchedulerController {
     /**
      * Gets scheduled visits within a date range.
      *
+     * <h2>CURL example<h2/>
+     * <code>
+     *      curl "http://localhost:8080/scheduler" \
+     *      -X POST \
+     *      -d "{\n  \"cpf\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}" \
+     *      -H "Content-type: application/json"
+     * </code>
+     *
      * @param       start Start range
      * @param       end End range
      *
@@ -42,14 +50,20 @@ public class SchedulerController {
      */
     @GetMapping("/scheduler/dates/{start}/{end}")
     public List<Scheduler> getDatesWithScheduling(@PathVariable("start")
-                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date start,
+                                                  @DateTimeFormat(pattern="yyyy-MM-dd") Date start,
                                                   @PathVariable("end")
-                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date end) {
+                                                  @DateTimeFormat(pattern="yyyy-MM-dd") Date end) {
         return schedulerService.getDatesWithScheduling(start, end);
     }
 
     /**
      * Gets scheduled visits for a specific day.
+     *
+     * <h2>CURL example<h2/>
+     * <code>
+     *      curl "http://localhost:8080/scheduler/2021-03-26" \
+     *      -d "{\n  \"cpf\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}"
+     * </code>
      *
      * @param       date Day whose visits will be obtained
      *
@@ -63,6 +77,12 @@ public class SchedulerController {
 
     /**
      * Gets all schedules that a dweller did.
+     *
+     * <h2>CURL example<h2/>
+     * <code>
+     *      curl "http://localhost:8080/scheduler/dweller/12345678900" \
+     *      -d "{\n  \"cpf\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}"
+     * </code>
      *
      * @param       cpf Dweller's cpf
      *

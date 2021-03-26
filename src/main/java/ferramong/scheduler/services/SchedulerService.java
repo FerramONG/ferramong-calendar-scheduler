@@ -5,6 +5,7 @@ import ferramong.scheduler.repositories.SchedulerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,11 @@ public class SchedulerService {
     private final SchedulerRepository schedulerRepository;
 
     public List<Scheduler> getDatesWithScheduling(Date start, Date end) {
-        return schedulerRepository.getDatesWithScheduling(start, end);
+        Calendar c = Calendar.getInstance();
+        c.setTime(end);
+        c.add(Calendar.DATE, 1);
+
+        return schedulerRepository.getDatesWithScheduling(start, c.getTime());
     }
 
     public List<Scheduler> getSchedulerForDay(Date date) {

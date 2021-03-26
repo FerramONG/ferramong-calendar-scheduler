@@ -28,13 +28,6 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
             @Param("end") Date end
     );
 
-    /*@Query(value=
-            "SELECT s FROM Scheduler s " +
-            "WHERE EXTRACT(DAY FROM s.date) = EXTRACT(DAY FROM :date) " +
-            "AND EXTRACT(MONTH FROM s.date) = EXTRACT(MONTH FROM :date) " +
-            "AND EXTRACT(YEAR FROM s.date) = EXTRACT(YEAR FROM :date)",
-            nativeQuery = true
-    )*/
     @Query(value=
             "SELECT s FROM Scheduler s " +
             "WHERE SUBSTRING(s.date, 1, 4) = SUBSTRING(:date, 1, 4) " +
