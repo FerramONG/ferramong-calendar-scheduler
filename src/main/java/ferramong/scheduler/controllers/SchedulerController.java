@@ -43,7 +43,7 @@ public class SchedulerController {
      * @param       start Start range
      * @param       end End range
      *
-     * @return      JSON with scheduled visits in the interval [start; end]
+     * @return      Scheduled visits in the interval [start; end]
      */
     @GetMapping("/scheduler/dates/{start}/{end}")
     public List<Scheduler> getDatesWithScheduling(@PathVariable("start")
@@ -101,7 +101,8 @@ public class SchedulerController {
      *
      * @param       scheduling Scheduling information
      *
-     * @return      JSON with response code
+     * @return Accepted request (202) if scheduling has been successful;
+     * otherwise, returns bad request (400) if an error occurred
      */
     @CrossOrigin
     @PostMapping(
@@ -131,7 +132,8 @@ public class SchedulerController {
      *
      * @param       scheduling Scheduling information
      *
-     * @return      JSON with response code
+     * @return      Accepted request (202) if scheduling has been successful;
+     * otherwise, returns bad request (400) if an error occurred
      */
     @CrossOrigin
     @DeleteMapping(
