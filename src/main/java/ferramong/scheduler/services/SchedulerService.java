@@ -5,6 +5,8 @@ import ferramong.scheduler.repositories.SchedulerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -22,8 +24,38 @@ public class SchedulerService {
 
     private final SchedulerRepository schedulerRepository;
 
-    public List<Scheduler> listAllWithName(String name) {
-        return schedulerRepository.listAllWithName(name);
+    public List<Scheduler> getDatesWithScheduling(Date start, Date end) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(end);
+        c.add(Calendar.DATE, 1);
+
+        return schedulerRepository.getDatesWithScheduling(start, c.getTime());
+    }
+
+    public List<Scheduler> getSchedulerForDay(Date date) {
+        return schedulerRepository.getSchedulerForDay(date);
+    }
+
+    public List<Scheduler> getAllById(int idDweller) {
+        return schedulerRepository.getAllById(idDweller);
+    }
+
+    public Date getById(int idDweller) {
+        return schedulerRepository.getById(idDweller).get(0).getDate();
+    }
+
+    public boolean schedule(Scheduler scheduling) {
+        int rowsAffected = schedulerRepository.schedule(scheduling.getIdDweller(), scheduling.getDate());
+
+        return (rowsAffected > 0);
+    }
+
+    // Matheus fará
+    public boolean unschedule(int idDweller) {
+        return false;
+        /*int rowsAffected = schedulerRepository.unschedule(idDweller);
+
+        return (rowsAffected > 0);*/
     }
 
     public boolean unschedule(int idDweller) {
