@@ -57,4 +57,11 @@ public class SchedulerService {
 
         return (rowsAffected > 0);*/
     }
+
+    public boolean unschedule(int idDweller) {
+        int rowsAffected = schedulerRepository.unschedule(idDweller);
+
+        return (rowsAffected > 0);
+    }
+
 }

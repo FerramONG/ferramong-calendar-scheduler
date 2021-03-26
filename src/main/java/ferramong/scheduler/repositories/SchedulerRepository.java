@@ -69,15 +69,15 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
             @Param("date") Date date
     );
 
-    // Matheus fará
-    /*
     @Transactional
     @Modifying
     @Query(value=
-            "...",
+            "DELETE FROM Scheduler " +
+                    "(idDweller) " +
+                    "VALUES (:idDweller)",
             nativeQuery = true
     )
     public int unschedule(
             @Param("idDweller") int idDweller
-    );*/
+    );
 }
