@@ -96,7 +96,15 @@ public class SchedulerController {
      */
     @GetMapping("/scheduler/dweller/{idDweller}/last")
     public Date getById(@PathVariable("idDweller") int idDweller) {
-        return schedulerService.getById(idDweller);
+        // TODO refactor
+        try {
+            return ResponseEntity.ok().body(schedulerService.getById(idDweller));
+        }
+        catch (Exception e) {
+            ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(204).build();
     }
 
     /**
