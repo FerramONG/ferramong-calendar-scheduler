@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Para modificar o banco de dados de testes (H2 - em memória), modifique 'resources/data.sql'
  */
 @SpringBootApplication
-public class App {
+public class FerramongSchedulerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		SpringApplication.run(FerramongSchedulerApplication.class, args);
 	}
 
 }
