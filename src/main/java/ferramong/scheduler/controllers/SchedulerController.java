@@ -153,7 +153,6 @@ public class SchedulerController {
      * @return      Accepted request (202) if scheduling has been successful;
      * otherwise, returns bad request (400) if an error occurred
      */
-    @CrossOrigin
     @DeleteMapping(
             value = "/scheduler",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
