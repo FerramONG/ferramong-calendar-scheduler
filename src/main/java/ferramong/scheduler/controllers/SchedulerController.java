@@ -19,12 +19,6 @@ import java.lang.reflect.Member;
 import java.net.URI;
 import java.util.*;
 
-/*
-* Controller
-*   Deve ter minimo de logica
-*	Serve para chamar serviços
-*	Mapeia endpoints
-* */
 @CrossOrigin
 @RestController
 @AllArgsConstructor
@@ -37,7 +31,7 @@ public class SchedulerController {
      *
      * <h2>CURL example</h2>
      * <code>
-     *      curl "http://localhost:8080/scheduler/dates/2021-03-27/2021-03-28"
+     *      curl "https://ferramong-scheduler.herokuapp.com/scheduler/dates/2021-03-27/2021-03-28"
      * </code>
      *
      * @param       start Start range
@@ -58,7 +52,7 @@ public class SchedulerController {
      *
      * <h2>CURL example</h2>
      * <code>
-     *      curl "http://localhost:8080/scheduler/2021-03-26"
+     *      curl "https://ferramong-scheduler.herokuapp.com/scheduler/2021-03-26"
      * </code>
      *
      * @param       date Day whose visits will be obtained
@@ -76,7 +70,7 @@ public class SchedulerController {
      *
      * <h2>CURL example</h2>
      * <code>
-     *      curl "http://localhost:8080/scheduler/dweller/12345678900"
+     *      curl "https://ferramong-scheduler.herokuapp.com/scheduler/dweller/123456789"
      * </code>
      *
      * @param       idDweller Dweller's id
@@ -93,7 +87,7 @@ public class SchedulerController {
      *
      * <h2>CURL example</h2>
      * <code>
-     *      curl "http://localhost:8080/scheduler/dweller/12345678900/last"
+     *      curl "https://ferramong-scheduler.herokuapp.com/scheduler/dweller/123456789/last"
      * </code>
      *
      * @param       idDweller Dweller's id
@@ -110,9 +104,9 @@ public class SchedulerController {
      *
      * <h2>CURL example</h2>
      * <code>
-     *      curl "http://localhost:8080/schedule" \
+     *      curl "https://ferramong-scheduler.herokuapp.com/scheduler" \
      *      -X POST \
-     *      -d "{\n  \"idDweller\": \"12345678900\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}" \
+     *      -d "{\n  \"idDweller\": \"123456789\", \n  \"date\": \"2021-03-26T10:35:00.000Z\"\n}" \
      *      -H "Content-type: application/json"
      * </code>
      *
