@@ -45,9 +45,13 @@ public class SchedulerService {
     }
 
     public boolean schedule(Scheduler scheduling) {
-        int rowsAffected = schedulerRepository.schedule(scheduling.getIdDweller(), scheduling.getDate());
-
-        return (rowsAffected > 0);
+        try {
+            schedulerRepository.save(scheduling);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean unschedule(int idDweller) {
