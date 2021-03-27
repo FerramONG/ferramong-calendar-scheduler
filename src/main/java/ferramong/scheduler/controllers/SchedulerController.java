@@ -135,15 +135,14 @@ public class SchedulerController {
         return ResponseEntity.accepted().build();
     }
 
-    // Matheus fará
     /**
      * Unschedules a visit.
      *
      * <h2>CURL example</h2>
      * <code>
-     *      curl "http://localhost:8080/schedule" \
+     *      curl "https://ferramong-scheduler.herokuapp.com/scheduler" \
      *      -X DELETE \
-     *      -d "{\n  \"id\": \"12345678900\"}" \
+     *      -d "{\n  \"id\": \"123456789\"}" \
      *      -H "Content-type: application/json"
      * </code>
      *
@@ -158,7 +157,7 @@ public class SchedulerController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public ResponseEntity<Scheduler> unschedule(int idDweller) {
+    public ResponseEntity<Scheduler> unschedule(@PathVariable("idDweller") int idDweller) {
         if (!schedulerService.unschedule(idDweller)) {
             return ResponseEntity.badRequest().build();
         }
