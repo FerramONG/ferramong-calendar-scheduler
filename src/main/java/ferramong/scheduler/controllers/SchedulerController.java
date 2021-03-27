@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-
 /*
 * Controller
 *   Deve ter minimo de logica
 *	Serve para chamar serviços
 *	Mapeia endpoints
 * */
-@CrossOrigin(methods = {GET, POST, PUT, DELETE})
 @RestController
 @AllArgsConstructor
 public class SchedulerController {
@@ -95,7 +92,7 @@ public class SchedulerController {
      * @return      JSON with the dweller's schedules with the informed id
      */
     @GetMapping("/scheduler/dweller/{idDweller}/last")
-    public ResponseEntity<Date> getById(@PathVariable("idDweller") int idDweller) {
+    public ResponseEntity<Scheduler> getById(@PathVariable("idDweller") int idDweller) {
         // TODO refactor
         try {
             return ResponseEntity.ok().body(schedulerService.getById(idDweller));
@@ -123,7 +120,6 @@ public class SchedulerController {
      * @return Accepted request (202) if scheduling has been successful;
      * otherwise, returns bad request (400) if an error occurred
      */
-    @CrossOrigin
     @PostMapping(
             value = "/scheduler",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -153,7 +149,6 @@ public class SchedulerController {
      * @return      Accepted request (202) if scheduling has been successful;
      * otherwise, returns bad request (400) if an error occurred
      */
-    @CrossOrigin
     @DeleteMapping(
             value = "/scheduler",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},

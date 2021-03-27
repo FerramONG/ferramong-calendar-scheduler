@@ -40,14 +40,14 @@ public class SchedulerService {
         return schedulerRepository.getAllById(idDweller);
     }
 
-    public Date getById(int idDweller) throws Exception {
+    public Scheduler getById(int idDweller) throws Exception {
         // TODO refactor
-        var dates = schedulerRepository.getById(idDweller);
+        var scheduledDates = schedulerRepository.getById(idDweller);
 
-        if (dates.isEmpty())
+        if (scheduledDates.isEmpty())
             throw new Exception();
 
-        return dates.get(0).getDate();
+        return scheduledDates.get(0);
     }
 
     public boolean schedule(Scheduler scheduling) {
