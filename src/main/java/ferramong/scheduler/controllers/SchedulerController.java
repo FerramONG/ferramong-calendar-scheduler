@@ -17,6 +17,7 @@ import java.util.List;
 *	Serve para chamar serviços
 *	Mapeia endpoints
 * */
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class SchedulerController {
