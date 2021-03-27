@@ -58,26 +58,6 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value=
-            "INSERT INTO Scheduler " +
-            "(idDweller, date) " +
-            "VALUES (:idDweller, :date)",
-            nativeQuery = true
-    )
-    public int schedule(
-            @Param("idDweller") int idDweller,
-            @Param("date") Date date
-    );
-
-    @Transactional
-    @Modifying
-    @Query(value=
-            "DELETE FROM Scheduler " +
-                    "(idDweller) " +
-                    "VALUES (:idDweller)",
-            nativeQuery = true
-    )
-    public int unschedule(
-            @Param("idDweller") int idDweller
-    );
+    @Query("DELETE FROM Scheduler s where s.idDweller = :idDweller")
+    public int unschedule(@Param("idDweller") int idDweller);
 }
