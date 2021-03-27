@@ -149,7 +149,7 @@ public class SchedulerController {
      * @return      Accepted request (202) if scheduling has been successful;
      * otherwise, returns bad request (400) if an error occurred
      */
-    @PutMapping(
+    @PostMapping(
             value = "/scheduler",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
