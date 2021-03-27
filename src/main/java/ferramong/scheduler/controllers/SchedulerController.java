@@ -95,7 +95,7 @@ public class SchedulerController {
      * @return      JSON with the dweller's schedules with the informed id
      */
     @GetMapping("/scheduler/dweller/{idDweller}/last")
-    public Date getById(@PathVariable("idDweller") int idDweller) {
+    public ResponseEntity<Date> getById(@PathVariable("idDweller") int idDweller) {
         // TODO refactor
         try {
             return ResponseEntity.ok().body(schedulerService.getById(idDweller));
