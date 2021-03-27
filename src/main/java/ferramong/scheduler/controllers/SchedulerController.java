@@ -1,23 +1,17 @@
 package ferramong.scheduler.controllers;
 
 import ferramong.scheduler.entities.Scheduler;
-import ferramong.scheduler.models.Person;
-import ferramong.scheduler.models.Post;
 import ferramong.scheduler.services.SchedulerService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
-import javax.ws.rs.PathParam;
-import java.lang.reflect.Member;
-import java.net.URI;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /*
 * Controller
@@ -25,7 +19,7 @@ import java.util.*;
 *	Serve para chamar serviços
 *	Mapeia endpoints
 * */
-@CrossOrigin
+@CrossOrigin(methods = {GET, POST, PUT, DELETE})
 @RestController
 @AllArgsConstructor
 public class SchedulerController {
