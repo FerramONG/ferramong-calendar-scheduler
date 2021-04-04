@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Date;
 import java.util.List;
@@ -17,9 +18,12 @@ import java.util.List;
 *	Serve para chamar serviços
 *	Mapeia endpoints
 * */
-@CrossOrigin
 @RestController
 @AllArgsConstructor
+@CrossOrigin(
+        origins = CorsConfiguration.ALL,
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
+)
 public class SchedulerController {
 
     private final SchedulerService schedulerService;
@@ -122,9 +126,9 @@ public class SchedulerController {
      * otherwise, returns bad request (400) if an error occurred
      */
     @PostMapping(
-            value = "/scheduler",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+            path = "/scheduler",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Scheduler> schedule(@RequestBody Scheduler scheduling) {
         if (!schedulerService.schedule(scheduling)) {
@@ -152,9 +156,9 @@ public class SchedulerController {
      */
     @DeleteMapping(value = "/scheduler/{idDweller}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Scheduler> unschedule(@PathVariable("idDweller") int idDweller) {
-//        if (!schedulerService.unschedule(idDweller)) {
-//            return ResponseEntity.badRequest().build();
-//        }
+        if (!schedulerService.unschedule(idDweller)) {
+            return ResponseEntity.badRequest().build();
+        }
 
         return ResponseEntity.accepted().build();
     }
