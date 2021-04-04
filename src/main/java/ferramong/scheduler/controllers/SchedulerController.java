@@ -150,11 +150,7 @@ public class SchedulerController {
      * @return      Accepted request (202) if scheduling has been successful;
      * otherwise, returns bad request (400) if an error occurred
      */
-    @DeleteMapping(
-            value = "/scheduler/{idDweller}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-    )
+    @DeleteMapping(value = "/scheduler/{idDweller}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Scheduler> unschedule(@PathVariable("idDweller") int idDweller) {
         if (!schedulerService.unschedule(idDweller)) {
             return ResponseEntity.badRequest().build();
