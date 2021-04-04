@@ -152,9 +152,9 @@ public class SchedulerController {
      */
     @DeleteMapping(value = "/scheduler/{idDweller}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Scheduler> unschedule(@PathVariable("idDweller") int idDweller) {
-        if (!schedulerService.unschedule(idDweller)) {
-            return ResponseEntity.badRequest().build();
-        }
+//        if (!schedulerService.unschedule(idDweller)) {
+//            return ResponseEntity.badRequest().build();
+//        }
 
         return ResponseEntity.accepted().build();
     }
