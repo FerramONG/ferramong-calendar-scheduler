@@ -151,7 +151,7 @@ public class SchedulerController {
      * otherwise, returns bad request (400) if an error occurred
      */
     @DeleteMapping(
-            value = "/scheduler",
+            value = "/scheduler/{idDweller}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
