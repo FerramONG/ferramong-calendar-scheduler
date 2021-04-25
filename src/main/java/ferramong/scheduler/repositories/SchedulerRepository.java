@@ -11,11 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/*
- * Repository
- *      Responsável por gerenciar queries do banco de dados
- */
-
 @Repository
 public interface SchedulerRepository extends JpaRepository<Scheduler, Integer> {
 
