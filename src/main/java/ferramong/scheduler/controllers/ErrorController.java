@@ -1,6 +1,5 @@
 package ferramong.scheduler.controllers;
 
-import ferramong.scheduler.exceptions.UnauthorizedException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,12 +35,6 @@ public class ErrorController extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> handleIllegalArgumentExceptions(Exception ex,
                                                                         WebRequest request) {
         return new ResponseEntity<>(generateErrorResponse(ex), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(UnauthorizedException.class)
-    public final ResponseEntity<Object> handleBadCredentialsException(UnauthorizedException ex,
-                                                                      WebRequest request) {
-        return new ResponseEntity<>(generateErrorResponse(ex), HttpStatus.UNAUTHORIZED);
     }
 
     private Map<String, String> generateErrorResponse(Exception ex) {
