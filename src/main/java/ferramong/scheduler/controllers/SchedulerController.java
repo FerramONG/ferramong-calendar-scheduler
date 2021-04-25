@@ -12,12 +12,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import java.util.Date;
 import java.util.List;
 
-/*
-* Controller
-*   Deve ter minimo de logica
-*	Serve para chamar serviços
-*	Mapeia endpoints
-* */
 @RestController
 @AllArgsConstructor
 @CrossOrigin(
@@ -98,7 +92,6 @@ public class SchedulerController {
      */
     @GetMapping("/scheduler/dweller/{idDweller}/last")
     public ResponseEntity<Scheduler> getById(@PathVariable("idDweller") int idDweller) {
-        // TODO refactor
         try {
             return ResponseEntity.ok().body(schedulerService.getById(idDweller));
         }
